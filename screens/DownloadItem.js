@@ -1,28 +1,31 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 function DownloadItem(props) {
-  function onDeleteItem(item) {
-    alert("item: " + item.text + " pressed.");
-  }
-
   return (
-    <Pressable onPress={() => onDeleteItem(props.item)}>
-      <View style={styles.downloadItem}>
+    <View style={styles.downloadItem}>
+      <Pressable
+        android_ripple={{ color: "#210644" }}
+        onPress={props.onDeleteItem.bind(this, props.item)}
+        style={({ pressed }) => pressed && styles.pressedItem}
+      >
         <Text style={styles.downloadItemText}>{props.item.text}</Text>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   downloadItem: {
     margin: 8,
-    padding: 8,
     borderRadius: 6,
     backgroundColor: "#5e0acc",
   },
   downloadItemText: {
     color: "white",
+    padding: 8,
+  },
+  pressedItem: {
+    opacity: 0.5,
   },
 });
 export default DownloadItem;

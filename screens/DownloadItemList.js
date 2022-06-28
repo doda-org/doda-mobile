@@ -9,7 +9,12 @@ function DownloadItemList(props) {
       <FlatList
         data={props.urls}
         renderItem={(itemData) => {
-          return <DownloadItem item={itemData.item} />;
+          return (
+            <DownloadItem
+              onDeleteItem={props.onDeleteItem}
+              item={itemData.item}
+            />
+          );
         }}
       ></FlatList>
     </View>
