@@ -1,49 +1,23 @@
+import "react-native-gesture-handler";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import DownloadItemList from "./screens/DownloadItemList";
-import UrlInput from "./screens/UrlInput";
+
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+import Settings from "./screens/Settings";
+import Home from "./screens/Home";
+const Drawer = createDrawerNavigator();
 
 export default function App() {
-  const [downloadUrls, setDownloadUrls] = useState([]);
-  const [modalIsVisibal, setModalIsVisible] = useState(false);
-
-  function startAddUrlHandler() {
-    setModalIsVisible(true);
-  }
-  function deleteItemHandler(item) {
-    alert("DELETING: '" + item.text + "'");
-    setDownloadUrls((currentDownloadUrls) => {
-      return currentDownloadUrls.filter((url) => url.key !== item.key);
-    });
-  }
-
-  function addUrlHandler(enteredUrl) {
-    setDownloadUrls((currentDownloadUrls) => [
-      ...currentDownloadUrls,
-      { key: Math.random().toString(), text: enteredUrl },
-    ]);
-    setModalIsVisible(false);
-  }
-
   return (
-    <View style={styles.appContainer}>
-      <Button title="Add New Url" onPress={startAddUrlHandler} />
-      <UrlInput
-        onAddUrl={addUrlHandler}
-        onCancel={() => setModalIsVisible(false)}
-        visible={modalIsVisibal}
-      />
-      <DownloadItemList urls={downloadUrls} onDeleteItem={deleteItemHandler} />
-    </View>
+    <>
+      <StatusBar style="auto" />
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName="Home">
+          <Drawer.Screen name="Home" component={Home} />
+          <Drawer.Screen name="Settings" component={Settings} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  appContainer: {
-    flex: 1,
-    paddingTop: 50,
-    paddingHorizontal: 16,
-    width: "100%",
-  },
-});

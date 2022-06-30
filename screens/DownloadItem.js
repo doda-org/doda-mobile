@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   downloadItem: {
     margin: 8,
     borderRadius: 6,
-    backgroundColor: "#5e0acc",
+    backgroundColor: "dodgerblue",
   },
   downloadItemText: {
     color: "white",
