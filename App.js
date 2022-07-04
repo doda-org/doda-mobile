@@ -1,22 +1,22 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
-import Settings from "./screens/Settings";
-import Home from "./screens/Home";
-const Drawer = createDrawerNavigator();
+import Settings from "./components/Settings";
+import Home from "./components/Home";
+import { SafeAreaView, StyleSheet, StatusBar } from "react-native";
 
 export default function App() {
   return (
-    <>
-      <StatusBar style="auto" />
-      <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Home">
-          <Drawer.Screen name="Home" component={Home} />
-          <Drawer.Screen name="Settings" component={Settings} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </>
+    <SafeAreaView style={styles.appContainer}>
+      <StatusBar animated={true} backgroundColor="dodgerblue" />
+      <Home />
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  appContainer: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#ECF0F1",
+  },
+});
