@@ -7,7 +7,7 @@ function DownloadItem(props) {
   return (
     <View style={styles.itemRow}>
       <Text>{"\u2022"} </Text>
-      <Text>{title}</Text>
+      <Text numberOfLines={2}>{title}</Text>
       <Text>{progress}</Text>
     </View>
   );
@@ -17,5 +17,6 @@ const styles = StyleSheet.create({
   itemRow: {
     flexDirection: "row",
   },
+  itemTitle: {},
 });
 export default DownloadItem;

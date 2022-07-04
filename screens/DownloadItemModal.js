@@ -8,7 +8,9 @@ function DownloadItemModal(props) {
   return (
     <Modal visible={props.visible} animationType="fade" transparent={true}>
       <View style={styles.modalContent}>
-        <Text style={styles.title}>{title}</Text>
+        <Text numberOfLines={1} style={styles.title}>
+          {title}
+        </Text>
         <DownloadItemList items={items} style={styles.itemList} />
         <Button onPress={props.onClose} title="Close" />
       </View>
@@ -32,6 +34,7 @@ const styles = StyleSheet.create({
   },
   itemList: {
     flex: 1,
+    padding: 8,
   },
   title: {
     fontWeight: "bold",

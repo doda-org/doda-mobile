@@ -10,7 +10,6 @@ function DownloadRequest(props) {
   };
 
   function viewItemsModal() {
-    console.log("view items of " + title);
     setItemsModalIsVisible(true);
   }
   const [itemsModalIsVisible, setItemsModalIsVisible] = useState(false);
