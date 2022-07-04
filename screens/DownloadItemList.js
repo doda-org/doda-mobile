@@ -1,29 +1,17 @@
-import React, { useState } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import React from "react";
+import { View, FlatList, StyleSheet } from "react-native";
 import DownloadItem from "./DownloadItem";
-import UrlInput from "./UrlInput";
-
 function DownloadItemList(props) {
   return (
-    <View style={styles.downloadListContainer}>
+    <View style={props.style}>
       <FlatList
-        data={props.urls}
+        data={props.items}
         renderItem={(itemData) => {
-          return (
-            <DownloadItem
-              onDeleteItem={props.onDeleteItem}
-              item={itemData.item}
-            />
-          );
+          return <DownloadItem item={itemData.item} />;
         }}
       ></FlatList>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  downloadListContainer: {
-    flex: 5,
-  },
-});
 export default DownloadItemList;

@@ -8,13 +8,17 @@ import {
   Button,
   Modal,
   Image,
+  Switch,
 } from "react-native";
 
 function UrlInput(props) {
   const [enteredUrl, setEnteredUrl] = useState("");
+  const [onlyOffPeak, setOnlyOffPeak] = useState(true);
   function urlInputHandler(text) {
     setEnteredUrl(text);
   }
+  const toggleSwitch = () => setOnlyOffPeak((previousState) => !previousState);
+
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
@@ -28,17 +32,22 @@ function UrlInput(props) {
           onChangeText={urlInputHandler}
           value={enteredUrl}
           placeholder="Your URL to download"
-          // placeholderTextColor="#cccccc"
         />
         <View style={styles.buttonContainer}>
+          <Switch value={onlyOffPeak} onChange={toggleSwitch} />
+          <Text style={{ fontWeight: "bold" }}>
+            Download during offpeak hours
+          </Text>
+        </View>
+        <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <Button title="Calcel" onPress={props.onCancel} />
+            <Button title="Cancel" onPress={props.onCancel} />
           </View>
           <View style={styles.button}>
             <Button
               title="Add URL"
               onPress={() => {
-                props.onAddUrl(enteredUrl);
+                props.onAddUrl({ url: enteredUrl, schedule: !onlyOffPeak });
                 setEnteredUrl("");
               }}
             />
@@ -53,9 +62,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    // marginBottom: 24,
     margin: 8,
-    // backgroundColor: "#eeeeee",
   },
   textInput: {
     borderWidth: 1,
@@ -67,6 +74,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     marginTop: 16,
+    alignItems: "center",
   },
   button: {
     width: "30%",
